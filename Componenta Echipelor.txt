@@ -1,0 +1,34 @@
+﻿Componența echipelor:
+
+
+1. ORGANIZARE:
+	Țoncu Daniel(șef)
+	Cuzuc Alin
+	David Ștefan
+	Ignat Sebastian-Eusebiu
+	Sacară-Munteanu Andreea
+
+2. CATEGORII:
+	Al Owe Mona
+	Enache Rareș
+	Gălățanu Alexandra-Gabriela
+	Litianu Răzvan-Florentin
+	Mogage Andrei-Cătălin
+	Nistor Dana-Gabriela
+	Rusu Mihai-Lucian
+	Sandu Diana-Alexandra
+
+3. INTERFAȚĂ:
+	Chipăruș Alexandru-Vlăduț
+	Matei Dragoș-Alexandru
+	Mihalache Florin-Claudiu
+	Sturza Răzvan-Ioan
+	Zaharia Vasile-Cristian
+
+4. TESTARE:
+	Airinei Florina-Bianca
+	Isachi Valentin-Gheorghe
+	Jeroaea Cosmin Liviu
+	Moraru Mihai
+	Sfîrnaciuc Adrian
+	Ștefăniță Alexandru
