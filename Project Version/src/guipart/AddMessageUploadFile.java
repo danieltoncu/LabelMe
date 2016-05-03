@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,6 +20,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,14 +42,17 @@ public class AddMessageUploadFile {
     Button previousButton;
     Button cancelButton;
     Button backButton;
-
+    ListView<String> fileList;
+    ObservableList<String> files;
+    
     ArrayList<File> fileNames;
+    
     FileChooser fileChooser = new FileChooser();
 
     TextField pathField = new TextField();
     MainPage mainPage = new MainPage();
     Label textCategory;
-    
+
     public AddMessageUploadFile(MainPage _mainPage) {
         mainPage = _mainPage;
         setScene(mainPage.getStage());
@@ -54,9 +60,16 @@ public class AddMessageUploadFile {
 
     private void setScene(Stage window) {
         fileNames = new ArrayList<File>();
+        fileList = new ListView<String>();
+        files = FXCollections.observableArrayList();
+        fileList.setItems(files);
+        
+        fileList.setTranslateY(-50);
+        fileList.setMaxWidth(300);
+        fileList.setMinHeight(150);
+        
         Label addMessagesLabel = new Label("Add messages");
         Label loadedMessagesLabel = new Label("Loaded messages:");
-        
 
         Label imageLabel2 = new Label();
         Image image2 = new Image(getClass().getResourceAsStream("/resources/gui/labelme_logo.png"));
@@ -67,7 +80,7 @@ public class AddMessageUploadFile {
         imageBox2.setPadding(new Insets(20, 20, 20, 20));
         imageBox2.getChildren().add(imageLabel2);
 
-        acceptButton = new Button("Accept");
+        acceptButton = new Button("Accept All");
         browseButton = new Button("Browse");
         finishButton = new Button("Finish");
         previousButton = new Button("Previous");
@@ -89,6 +102,8 @@ public class AddMessageUploadFile {
         VBox filesPlaceholder = new VBox();
         filesPlaceholder.setSpacing(10);
         
+        backButton.setTranslateY(-50);
+        
         browseButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -102,23 +117,58 @@ public class AddMessageUploadFile {
                 if (file != null) {
                     pathField.setText(file.getName());
                     fileNames.add(file);
+                    files.add(file.getName());
                 }
             }
 
         });
-
+        
+        fileList.setOnMouseClicked(e -> {
+            //System.out.println(fileList.getSelectionModel().getSelectedItem());
+            files.remove(fileList.getSelectionModel().getSelectedItem());
+            for(File file : fileNames){
+                if(file.getName().equals(fileList.getSelectionModel().getSelectedItem())){
+                    fileNames.remove(file);
+                    break;
+                }
+            }
+        });
+        
         acceptButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent arg0) {
-                if(!fileNames.isEmpty()){
-                    Categorize categorize=new Categorize();
+                if (!fileNames.isEmpty()) {
+                    Categorize categorize = new Categorize();
                     categorize.trainModel();
+                    
+                    int size = files.size();
+                    
+                    for(int i = 0; i < size; i ++){
+                        String fileName = files.get(i);
+                        for(File file : fileNames){
+                            if(file.getName().equals(fileName)){
+                                try {
+                                    files.add(fileName + "      " + categorize.getCategory(FileUtils.readFileToString(file, "UTF-8")));
+                                } catch (IOException ex) {
+                                    Logger.getLogger(AddMessageUploadFile.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        }
+                        
+                    }
+                    
+                    int i = 0;
+                    while(i < size){
+                        files.remove(0);
+                        i++;
+                    }
+                    /*
                     try {
                         textCategory.setText("The text category is: " + categorize.getCategory(FileUtils.readFileToString(fileNames.get(fileNames.size() - 1), "UTF-8")));
                     } catch (IOException ex) {
                         Logger.getLogger(AddMessageUploadFile.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    }*/
                 }
                 /*
                 if (pathField.getText() != null) {
@@ -148,7 +198,7 @@ public class AddMessageUploadFile {
 
         });
 
-        layout.getChildren().addAll(imageLabel2, addMessagesLabel, hBox,textCategory, backButton);
+        layout.getChildren().addAll(imageLabel2, addMessagesLabel, hBox, textCategory, fileList , backButton);
         layout.setStyle("-fx-background-color: white");
         layout.setAlignment(Pos.TOP_CENTER);
         layout.setStyle("-fx-background-color: #B8EDFF;");
