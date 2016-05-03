@@ -1,0 +1,6 @@
+weather is nice
+stormy
+windy 
+sunny
+cold
+hot
