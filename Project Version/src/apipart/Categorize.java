@@ -1,5 +1,3 @@
-package apipart;
-
 import opennlp.tools.doccat.DoccatModel;
 import opennlp.tools.doccat.DocumentCategorizerME;
 import opennlp.tools.doccat.DocumentSample;
@@ -15,7 +13,7 @@ public class Categorize {
 
 	        InputStream dataIn = null;
 	        try {
-	            dataIn = new FileInputStream("src/resources/api/model.train");
+	            dataIn = new FileInputStream("model.train");
 	            ObjectStream<String> lineStream =
 	                    new PlainTextByLineStream(dataIn, "UTF-8");
 	            ObjectStream<DocumentSample> sampleStream = new DocumentSampleStream(lineStream);
@@ -43,7 +41,7 @@ public class Categorize {
 
 	    OutputStream modelOut = null;
 	    try {
-	        modelOut = new BufferedOutputStream(new FileOutputStream("src/resources/api/model.bin"));
+	        modelOut = new BufferedOutputStream(new FileOutputStream("model.bin"));
 	        model.serialize(modelOut);
 	    }
 	    catch (IOException e) {
@@ -67,7 +65,7 @@ public class Categorize {
 	public String getCategory(String inputText){
 		  InputStream is = null;
 	        try {
-	            is = new FileInputStream("src/resources/api/model.bin");
+	            is = new FileInputStream("model.bin");
 	        } catch (FileNotFoundException e) {
 	            e.printStackTrace();
 	        }
@@ -82,8 +80,9 @@ public class Categorize {
 	        DocumentCategorizerME myCategorizer = new DocumentCategorizerME(m);
 	        double[] outcomes=new double[10000];
 	        outcomes = myCategorizer.categorize(inputText);
-	 //       System.out.print(outcomes[1]);
 	        String category = myCategorizer.getBestCategory(outcomes);
+	        XML xml=new XML();
+	        xml.addMessage(category, inputText);
 	        return category;
 
 	}
