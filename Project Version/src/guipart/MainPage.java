@@ -5,6 +5,7 @@
  */
 package guipart;
 
+import apipart.XML;
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -20,7 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MainPage extends Application {
-    
+
     ArrayList<String> categories = new ArrayList<>();
     ArrayList<SetOfCategories> seturi = new ArrayList<>();
     SetOfCategories set1 = new SetOfCategories("FirstSet");
@@ -32,9 +33,11 @@ public class MainPage extends Application {
     Scene mainPageScene;
     Stage mainStage;
     
+    
+
     @Override
     public void start(Stage primaryStage) {
-        
+
         mainStage = primaryStage;
         set1.addCategory("Sport");
         seturi.add(set1);
@@ -72,8 +75,8 @@ public class MainPage extends Application {
         box.setPadding(new Insets(20, 20, 20, 20));
         box.setSpacing(40);
         box.setAlignment(Pos.CENTER);
-        messageButton = new Button("Mesaje");
-        categoryButton = new Button("Categorii");
+        messageButton = new Button("Add Texts");
+        categoryButton = new Button("Add Category");
         setButton = new Button("Seturi");
 
         messageButton.setPrefSize(200, 35);
@@ -92,30 +95,34 @@ public class MainPage extends Application {
             AddMessageUploadFile addMessage = new AddMessageUploadFile(this);
             mainStage.setScene(addMessage.getScene());
         });
+        categoryButton.setOnAction(e -> {
+            CreateCategoryFromGUI newGUI = new CreateCategoryFromGUI(this);
+        });
         mainPageScene = new Scene(mainPageBorder, 900, 600);
         mainPageBorder.setTop(imageBox);
         mainPageBorder.setCenter(tbox);
         mainPageBorder.setBottom(box);
-        
 
         mainStage.setTitle("MainPage!");
         mainStage.setScene(mainPageScene);
         mainStage.show();
     }
-    
-    public Stage getStage(){
+
+    public Stage getStage() {
         return mainStage;
     }
-    
-    public MainPage getMainPage(){
+
+    public MainPage getMainPage() {
         return this;
     }
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        XML xml = new XML();
+        xml.createDocument();
         launch(args);
     }
-    
+
 }
