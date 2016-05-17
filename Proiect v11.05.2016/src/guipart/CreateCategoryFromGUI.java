@@ -102,12 +102,30 @@ public class CreateCategoryFromGUI {
         pathField.setLayoutY(300);
         pathField.setPrefWidth(300);
         pathField.setPrefHeight(300);
+        
+        Button browseButton = new Button("Browse");
+         browseButton.setStyle("-fx-background-color: #FF6200;"
+                + "-fx-text-fill: white;");
+         
+         browseButton.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public   void handle(ActionEvent event) {
+                
+                fileChooser.getExtensionFilters().addAll((new FileChooser.ExtensionFilter("Text Files", "*.txt")));
+                File file = fileChooser.showOpenDialog(window);
 
+                if (file != null) {
+                    pathField.setText(file.getPath());
+                    fileNames.add(file);
+                }
+            }
+           
+        });
         //  Label addMessagesLabel = new Label("Add messages");
         //   addMessagesLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28));
         //   addMessagesLabel.setStyle("-fx-text-fill: #FF6200;");
         //   Label CategoriesCreated = new Label("Categories created:");
-        boxText.getChildren().addAll(textField,textField2);
+        boxText.getChildren().addAll(textField,textField2, pathField,browseButton );
 
         //Vbox2
         /*VBox boxText1 = new VBox();
