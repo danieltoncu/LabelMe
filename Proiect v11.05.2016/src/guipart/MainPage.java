@@ -11,9 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -22,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainPage extends Application {
@@ -30,7 +33,13 @@ public class MainPage extends Application {
     static ArrayList<SetOfCategories> categorii = new ArrayList<>();
     static SetOfCategories categorie = new SetOfCategories("FirstSet");
     static Map<String, ArrayList<String>> mapXml = new HashMap<>();
-
+    final Accordion acordeon = new Accordion();
+    
+    HBox total = new HBox();
+    VBox stanga = new VBox();
+    VBox dreapta = new VBox();
+    
+    
     Button messageButton;
     Button categoryButton;
     Button setButton;
@@ -42,7 +51,7 @@ public class MainPage extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
+        
         mainStage = primaryStage;
         //categorie.addText("Sport");
         //categorii.add(categorie);
@@ -68,6 +77,7 @@ public class MainPage extends Application {
         TitledPane[] setsTitledPane = new TitledPane[categorii.size()];
 
         BorderPane mainPageBorder = new BorderPane();
+        BorderPane outsidePageBorder = new BorderPane();
         mainPageBorder.setStyle("-fx-background-color: #B8EDFF;");
 
         //Label pentru logo
@@ -75,6 +85,7 @@ public class MainPage extends Application {
         Image image = new Image(getClass().getResourceAsStream("/resources/gui/labelme_logo.png"));
         imageLabel.setGraphic(new ImageView(image));
         imageLabel.setPrefSize(200, 200);
+        imageLabel.setPadding(new Insets( 0, 100, 0, 100));
         HBox imageBox = new HBox();
         imageBox.setAlignment(Pos.CENTER);
         imageBox.setPadding(new Insets(20, 20, 20, 20));
@@ -82,10 +93,10 @@ public class MainPage extends Application {
 
         //HBox pentru titled pane cu seturi.
         
-        HBox tbox = new HBox();
-        tbox.setPadding(new Insets(30, 30, 30, 30));
-        tbox.setSpacing(70);
-        tbox.setAlignment(Pos.CENTER);
+        VBox vbox = new VBox();
+        vbox.setPadding(new Insets(30, 30, 30, 30));
+        vbox.setSpacing(70);
+        vbox.setAlignment(Pos.CENTER);
         
 
         for (int i = 0; i < categorii.size(); i++) {
@@ -93,19 +104,22 @@ public class MainPage extends Application {
             setsTitledPane[i].setText(categorii.get(i).getName());
             setsTitledPane[i].setContent(categorii.get(i).categorii);
         }
-        tbox.getChildren().addAll(setsTitledPane);
+        acordeon.getPanes().addAll(setsTitledPane);
+        
+        vbox.getChildren().add(acordeon);
         ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(tbox);
+        scrollPane.setContent(vbox);
         scrollPane.setStyle("-fx-background: #B8EDFF;");
 
         //HBox pentru butoane;
-        HBox box = new HBox();
+        VBox box = new VBox();
         box.setPadding(new Insets(20, 20, 20, 20));
         box.setSpacing(40);
         box.setAlignment(Pos.CENTER);
         messageButton = new Button("Add Texts");
         categoryButton = new Button("Add Category");
         setButton = new Button("Set");
+        box.setPadding(new Insets(20, 0, 0, 0));
 
         messageButton.setPrefSize(200, 35);
         categoryButton.setPrefSize(200, 35);
@@ -129,10 +143,20 @@ public class MainPage extends Application {
         categoryButton.setOnAction(e -> {
             CreateCategoryFromGUI newGUI = new CreateCategoryFromGUI(this);
         });
-        mainPageScene = new Scene(mainPageBorder, 900, 600);
-        mainPageBorder.setTop(imageBox);
-        mainPageBorder.setCenter(scrollPane);
-        mainPageBorder.setBottom(box);
+        outsidePageBorder.setLeft(acordeon);
+        outsidePageBorder.setCenter(total);
+        total.getChildren().addAll(stanga, dreapta);
+        stanga.getChildren().add(imageLabel);
+        dreapta.getChildren().add(box);
+        
+        
+        
+        total.setStyle("-fx-background-color: #B8EDFF;");
+        stanga.setStyle("-fx-background-color: #B8EDFF;");
+        dreapta.setStyle("-fx-background-color: #B8EDFF;");
+        
+        
+        mainPageScene = new Scene(outsidePageBorder, 900, 600);
 
         mainStage.setTitle("MainPage!");
         mainStage.setScene(mainPageScene);
