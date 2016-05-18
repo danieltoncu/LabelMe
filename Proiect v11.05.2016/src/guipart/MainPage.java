@@ -47,15 +47,7 @@ public class MainPage extends Application {
     Scene mainPageScene;
     Stage mainStage;
     
-    
-
-    @Override
-    public void start(Stage primaryStage) {
-        
-        mainStage = primaryStage;
-        //categorie.addText("Sport");
-        //categorii.add(categorie);
-
+    public void refreshCategoryList(){
         XML xml = new XML();
         mapXml = xml.getMessagesForCategory();
         
@@ -67,11 +59,20 @@ public class MainPage extends Application {
             
             for(int i= 0 ; i< texte.size(); i++){
                 categorie.addText(texte.get(i));
-            }
-            
-            
+            }            
             categorii.add(categorie);     
         }
+        
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        
+        mainStage = primaryStage;
+        //categorie.addText("Sport");
+        //categorii.add(categorie);
+
+        refreshCategoryList();
         
         
         TitledPane[] setsTitledPane = new TitledPane[categorii.size()];

@@ -160,10 +160,12 @@ public class CreateCategoryFromGUI {
             ArrayList<String> keyWords = new ArrayList<String>(Arrays.asList(keyWordsPref.split(",[ ]*")));
             Category cat = new Category();
             cat.define(categoryName,keyWords);
-            window.setScene(mainPage.mainPageScene);
+            //mainPage.refreshCategoryList();
+            //window.setScene(mainPage.mainPageScene);
         });
         
         back.setOnAction(e -> {
+            mainPage.refreshCategoryList();
             window.setScene(mainPage.mainPageScene);
         });
         

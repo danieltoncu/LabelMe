@@ -145,6 +145,7 @@ public class XML {
 			    map.put(categoryName, mesaje);
 			    mesaje = new ArrayList<>();
 			}
+                        
 		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
 		} catch (IOException ioe) {
