@@ -22,18 +22,24 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class MainPage extends Application {
-
+    Text text = new Text("aici se afiseaza continutul fisierului text.");
     //ArrayList<String> categorii = new ArrayList<>();
     static ArrayList<SetOfCategories> categorii = new ArrayList<>();
     static SetOfCategories categorie = new SetOfCategories("FirstSet");
     static Map<String, ArrayList<String>> mapXml = new HashMap<>();
     final Accordion acordeon = new Accordion();
+    TextFlow continut = new TextFlow();
+    Pane textContainer = new Pane();
     
     HBox total = new HBox();
     VBox stanga = new VBox();
@@ -47,7 +53,22 @@ public class MainPage extends Application {
     Scene mainPageScene;
     Stage mainStage;
     
+<<<<<<< HEAD
     public void refreshCategoryList(){
+=======
+    
+
+    @Override
+    public void start(Stage primaryStage) {
+        mainStage = primaryStage;
+        //categorie.addText("Sport");
+        //categorii.add(categorie);
+        textContainer.getChildren().add(continut);
+        continut.getChildren().add(text);
+        continut.setPadding(new Insets( 200 ,40, 0, 40));
+        continut.setBackground(Background.EMPTY);
+        
+>>>>>>> 622975f4604166298b2594747a33f25b1cf1f392
         XML xml = new XML();
         mapXml = xml.getMessagesForCategory();
         
@@ -107,11 +128,6 @@ public class MainPage extends Application {
         }
         acordeon.getPanes().addAll(setsTitledPane);
         
-        vbox.getChildren().add(acordeon);
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(vbox);
-        scrollPane.setStyle("-fx-background: #B8EDFF;");
-
         //HBox pentru butoane;
         VBox box = new VBox();
         box.setPadding(new Insets(20, 20, 20, 20));
@@ -144,10 +160,12 @@ public class MainPage extends Application {
         categoryButton.setOnAction(e -> {
             CreateCategoryFromGUI newGUI = new CreateCategoryFromGUI(this);
         });
+        
         outsidePageBorder.setLeft(acordeon);
         outsidePageBorder.setCenter(total);
         total.getChildren().addAll(stanga, dreapta);
         stanga.getChildren().add(imageLabel);
+        stanga.getChildren().add(textContainer);
         dreapta.getChildren().add(box);
         
         
