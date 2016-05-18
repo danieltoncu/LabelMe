@@ -52,23 +52,9 @@ public class MainPage extends Application {
 
     Scene mainPageScene;
     Stage mainStage;
-    
-<<<<<<< HEAD
-    public void refreshCategoryList(){
-=======
-    
 
-    @Override
-    public void start(Stage primaryStage) {
-        mainStage = primaryStage;
-        //categorie.addText("Sport");
-        //categorii.add(categorie);
-        textContainer.getChildren().add(continut);
-        continut.getChildren().add(text);
-        continut.setPadding(new Insets( 200 ,40, 0, 40));
-        continut.setBackground(Background.EMPTY);
-        
->>>>>>> 622975f4604166298b2594747a33f25b1cf1f392
+    public void refreshCategoryList(){
+
         XML xml = new XML();
         mapXml = xml.getMessagesForCategory();
         
