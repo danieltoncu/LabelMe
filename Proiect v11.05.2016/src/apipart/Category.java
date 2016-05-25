@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Category {
 
@@ -83,6 +84,19 @@ public class Category {
         xml.addCategory(name);
         Categorize categorize=new Categorize();
     	categorize.trainModel();
+    	DefinitionXML xml2=new DefinitionXML();
+    	Scanner sc=null;
+		try {
+			sc = new Scanner(new File(filename));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		xml2.addCategory(name);
+    	while(sc.hasNextLine()){
+    	    String str = sc.nextLine();
+    	    xml2.addPattern(name, str);
+    	}
     }
     public void define(String name, ArrayList<String> keywords) {
         addToModel(name, keywords);
@@ -90,5 +104,9 @@ public class Category {
         xml.addCategory(name);
         Categorize categorize=new Categorize();
     	categorize.trainModel();
+    	DefinitionXML xml2=new DefinitionXML();
+    	xml2.addCategory(name);
+    	for(String s : keywords){
+    	xml2.addPattern(name, s);}
     }
 }

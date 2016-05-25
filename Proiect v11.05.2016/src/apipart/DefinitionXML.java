@@ -22,7 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class XML {
+public class DefinitionXML {
 	Document doc;
 	public void createDocument() {
 		try {
@@ -30,13 +30,13 @@ public class XML {
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.newDocument();
 			// root element
-			Element rootElement = doc.createElement("categories");
+			Element rootElement = doc.createElement("definition");
 			doc.appendChild(rootElement);
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("Categories.xml"));
+			StreamResult result = new StreamResult(new File("Definition.xml"));
 			transformer.transform(source, result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,11 +46,11 @@ public class XML {
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse("Categories.xml");
+			Document doc = docBuilder.parse("Definition.xml");
 
 			Node rootElement = doc.getFirstChild();
 
-			Element category = doc.createElement("category");
+			Element category = doc.createElement("definition");
 			category.setAttribute("name",name);
 			rootElement.appendChild(category);
 
@@ -58,7 +58,7 @@ public class XML {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("Categories.xml"));
+			StreamResult result = new StreamResult(new File("Definition.xml"));
 			transformer.transform(source, result);
 
 			//System.out.println("Categorie adaugata");
@@ -75,11 +75,11 @@ public class XML {
 
 	}
 
-	public void addMessage(String category,String text){
+	public void addPattern(String category,String text){
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse("Categories.xml");
+			Document doc = docBuilder.parse("Definition.xml");
 
 			Node rootElement = doc.getFirstChild();
 
@@ -93,7 +93,7 @@ public class XML {
 				Node nodeAttr = attr.getNamedItem("name");
 				//System.out.print(nodeAttr.getNodeValue());
 				if(nodeAttr.getNodeValue().equalsIgnoreCase(category)){
-					Element textNode = doc.createElement("Message");
+					Element textNode = doc.createElement("Patterns");
 					textNode.setTextContent(text);
 					node.appendChild(textNode);
 				}
@@ -104,7 +104,7 @@ public class XML {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("Categories.xml"));
+			StreamResult result = new StreamResult(new File("Definition.xml"));
 			transformer.transform(source, result);
 
 			//System.out.println("Mesaj adaugat");
@@ -119,13 +119,13 @@ public class XML {
 			sae.printStackTrace();
 		}
 	}
-	public Map<String,ArrayList<String>> getMessagesForCategory (){
+	Map<String,ArrayList<String>> getMessagesForCategory (){
 		Map<String,ArrayList<String>> map= new HashMap<>();
 		ArrayList<String> mesaje = new ArrayList<>();
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse("Categories.xml");
+			Document doc = docBuilder.parse("Definition.xml");
 
 			Node rootElement = doc.getFirstChild();
 			

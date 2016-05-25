@@ -5,6 +5,8 @@
  */
 package guipart;
 
+import apipart.Categorize;
+import apipart.Category;
 import apipart.XML;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,7 +66,7 @@ public class MainPage extends Application {
             ArrayList<String> texte = new ArrayList<>();
             texte = mapXml.get(s);
             
-            for(int i= 0 ; i< texte.size(); i++){
+            for(int i = 0; i < texte.size(); i++){
                 categorie.addText(texte.get(i));
             }            
             categorii.add(categorie);     
@@ -74,7 +76,7 @@ public class MainPage extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        
+
         mainStage = primaryStage;
         //categorie.addText("Sport");
         //categorii.add(categorie);

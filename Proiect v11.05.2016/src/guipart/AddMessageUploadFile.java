@@ -149,7 +149,12 @@ public class AddMessageUploadFile {
                         for(File file : fileNames){
                             if(file.getName().equals(fileName)){
                                 try {
-                                    files.add(fileName + "      " + categorize.getCategory(FileUtils.readFileToString(file, "UTF-8")));
+                                    ArrayList<String> categories = categorize.getCategory(FileUtils.readFileToString(file, "UTF-8"),fileName);
+                                    String rezultat="";
+                                    for(int index=0;index<categories.size();index++){
+                                        rezultat=rezultat+" "+categories.get(index);
+                                    }
+                                    files.add(fileName + "      " + rezultat);
                                 } catch (IOException ex) {
                                     Logger.getLogger(AddMessageUploadFile.class.getName()).log(Level.SEVERE, null, ex);
                                 }
