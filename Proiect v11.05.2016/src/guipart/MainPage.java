@@ -123,7 +123,7 @@ public class MainPage extends Application {
         box.setAlignment(Pos.CENTER);
         messageButton = new Button("Add Texts");
         categoryButton = new Button("Add Category");
-        setButton = new Button("Set");
+        setButton = new Button("Email");
         box.setPadding(new Insets(20, 0, 0, 0));
 
         messageButton.setPrefSize(200, 35);
