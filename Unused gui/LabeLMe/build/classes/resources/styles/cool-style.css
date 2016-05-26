@@ -1,0 +1,62 @@
+@font-face {
+    src:url(/resources/fonts/Brandon_light.otf);
+}
+
+@font-face {
+    src:url(/resources/fonts/Brandon_med.otf);
+}
+
+@font-face {
+    src:url(/resources/fonts/Brandon_bld.otf);
+}
+
+@font-face {
+    src:url(/resources/fonts/Brandon_blk.otf);
+}
+
+.title-bar{
+    -fx-background-color: #C4C4C4;
+}
+
+.buttons{
+    -fx-background-color: #EFEFEF;
+    -fx-text-fill: #BC2A2A;
+    -fx-font-family: "Brandon Grotesque Medium";
+    -fx-font-size: 24;
+    -fx-padding: 1 18;
+    -fx-background-radius: 0;
+    -fx-border-width: 3;
+    -fx-border-style: solid;
+    -fx-border-color: #BC2A2A;
+}
+
+.button:focused {
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 0, 0, 0;
+}
+
+.button:hover {
+    -fx-background-color: #BC2A2A;
+    -fx-text-fill: #EFEFEF;
+    -fx-cursor: hand;
+}
+
+.text-field{
+    -fx-font-family: "Brandon Grotesque Medium";
+    -fx-font-size: 24;
+    -fx-padding: 5 0 5 15;
+    
+    -fx-background-radius: 0px;
+    -fx-border-width: 3;
+    -fx-border-style: solid;
+    -fx-border-color: #BC2A2A;
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
+
+.text-field:focused{
+    -fx-background-insets: 0, 0, 0;
+}
+
+#hello-label{
+    
+}
