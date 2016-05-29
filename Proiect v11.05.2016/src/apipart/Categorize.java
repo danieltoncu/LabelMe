@@ -61,7 +61,7 @@ public class Categorize {
         }
     }
 
-    public ArrayList<String> getCategory(String inputText,String filename) {
+    public ArrayList<String> getCategory(String inputText, String filename) {
         InputStream is = null;
         try {
             is = new FileInputStream("src/resources/api/model.bin");
@@ -75,13 +75,12 @@ public class Categorize {
             e.printStackTrace();
         }
         DocumentCategorizerME myCategorizer = new DocumentCategorizerME(m);
-        double[] outcomes = new double[100000];
+        double[] outcomes = new double[10000];
         outcomes = myCategorizer.categorize(inputText);
         String category = myCategorizer.getAllResults(outcomes);
         XML xml = new XML();
-        category=category.replace(",", ".");
         System.out.println(category);
-        xml.addMessage(category, inputText);
+        xml.addMessage(category, filename);
         Results map=new Results();
         Map<String,BigDecimal> myMap=map.mapValues(category);
         ArrayList<String> rezultat=map.getCategory(myMap);
@@ -90,7 +89,6 @@ public class Categorize {
         }
         return rezultat;
     }
-    
     public void copyFile(File sourceFile, File destFile) throws IOException {
 
         if(!destFile.exists()) {

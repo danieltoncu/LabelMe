@@ -1,17 +1,22 @@
 package apipart;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Application {
 
     public static void main(String args[]) {
         Categorize categorize = new Categorize();
         //categorize.trainModel();
-      //System.out.println(categorize.getCategory("The oldest classical Greek and Latin writing had little or no space between words,"," and could be written in boustrophedon (alternating directions). Over time, text direction (left to right) became standardized, and word dividers and terminal punctuation became common. The first way to divide sentences into groups was the original paragraphos, similar to an underscore at the beginning of the new group.[3] The Greek paragraphos evolved into the pilcrow (¶), which in English manuscripts in the Middle Ages can be seen inserted inline between sentences. The hedera leaf (e.g. ☙) has also been used in the same way."));
-     Category a= new Category();
-////a.define("new", "file.txt");
-      //a.define("netru","file.txt");
-//        System.out.println("aici");
-//       a.define("positive", "positive.txt");
-//       a.define("negative", "negative.txt");
+//    System.out.println(categorize.getCategory("very good","tr.txt"));
+      Category a= new Category();
+//a.define("new", "file.txt");
+//        ArrayList<String> ai =new ArrayList();
+//        ai.add("positix");
+//        a.define("netru",ai);
+//        a.define("positive1", "positive.txt");
+//        a.define("negative", "negative.txt");
 //        //xml.addCategory("sports");
 //        //xml.addMessage("sports","blablablabla");
         XML xml= new XML();
@@ -30,7 +35,7 @@ public class Application {
         	System.out.println(mesaje.get(i));
         }*/
         
-        DefinitionXML definition= new DefinitionXML();
+       DefinitionXML definition= new DefinitionXML();
        definition.createDocument();
 //    	Category c=new Category();
 //    	ArrayList<String> a= new ArrayList<>();

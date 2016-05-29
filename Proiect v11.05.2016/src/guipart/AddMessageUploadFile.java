@@ -24,6 +24,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -122,17 +123,18 @@ public class AddMessageUploadFile {
             }
 
         });
-        
-        fileList.setOnMouseClicked(e -> {
-            //System.out.println(fileList.getSelectionModel().getSelectedItem());
-            files.remove(fileList.getSelectionModel().getSelectedItem());
-            for(File file : fileNames){
-                if(file.getName().equals(fileList.getSelectionModel().getSelectedItem())){
-                    fileNames.remove(file);
-                    break;
-                }
-            }
-        });
+        //TODO: right click -> remove file from list
+//        fileList.setOnMouseClicked(e -> {
+//            if(e.isSecondaryButtonDown() && !fileList.getSelectionModel().getSelectedItem().isEmpty()){
+//             files.remove(fileList.getSelectionModel().getSelectedItem());
+//             for(File file : fileNames){
+//                   if(file.getName().equals(fileList.getSelectionModel().getSelectedItem())){
+//                       fileNames.remove(file);
+//                       break;
+//                    }
+//             }
+//            }
+//        });
         
         acceptButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -140,7 +142,6 @@ public class AddMessageUploadFile {
             public void handle(ActionEvent arg0) {
                 if (!fileNames.isEmpty()) {
                     Categorize categorize = new Categorize();
-                    categorize.trainModel();
                     
                     int size = files.size();
                     
@@ -149,18 +150,18 @@ public class AddMessageUploadFile {
                         for(File file : fileNames){
                             if(file.getName().equals(fileName)){
                                 try {
-                                    ArrayList<String> categories = categorize.getCategory(FileUtils.readFileToString(file, "UTF-8"),fileName);
+                                    ArrayList<String> categories = categorize.getCategory(FileUtils.readFileToString(file, "UTF-8"),file.getName());
                                     String rezultat="";
-                                    for(int index=0;index<categories.size();index++){
+                                    for(int index=0;index < categories.size() ; index++){
                                         rezultat=rezultat+" "+categories.get(index);
                                     }
+                                    System.out.println(rezultat);
                                     files.add(fileName + "      " + rezultat);
                                 } catch (IOException ex) {
                                     Logger.getLogger(AddMessageUploadFile.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         }
-                        
                     }
                     
                     int i = 0;
@@ -168,6 +169,7 @@ public class AddMessageUploadFile {
                         files.remove(0);
                         i++;
                     }
+                      window.setScene(mainPage.mainPageScene);
                     /*
                     try {
                         textCategory.setText("The text category is: " + categorize.getCategory(FileUtils.readFileToString(fileNames.get(fileNames.size() - 1), "UTF-8")));
