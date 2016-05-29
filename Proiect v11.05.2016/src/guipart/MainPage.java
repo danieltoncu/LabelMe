@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,9 +22,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -37,9 +39,8 @@ public class MainPage extends Application {
     static SetOfCategories categorie = new SetOfCategories("FirstSet");
     static Map<String, ArrayList<String>> mapXml = new HashMap<>();
     final Accordion acordeon = new Accordion();
-    TextFlow continut = new TextFlow();
-    Pane textContainer = new Pane();
     
+    TextFlow continut = new TextFlow();    
     HBox total = new HBox();
     VBox stanga = new VBox();
     VBox dreapta = new VBox();
@@ -84,6 +85,9 @@ public class MainPage extends Application {
         forText.setPrefSize(300, 300);
         forText.setMaxSize(300, 300);
         forText.setAlignment(Pos.CENTER);
+        continut.setPadding(new Insets(10, 10, 10, 10));
+        continut.getChildren().add(text);
+        forText.getChildren().add(continut);
         TitledPane[] setsTitledPane = new TitledPane[categorii.size()];
 
         BorderPane mainPageBorder = new BorderPane();
@@ -113,8 +117,19 @@ public class MainPage extends Application {
             setsTitledPane[i] = new TitledPane();
             setsTitledPane[i].setText(categorii.get(i).getName());
             setsTitledPane[i].setContent(categorii.get(i).categorii);
-        }
+            setsTitledPane[i].getContent().setOnMouseClicked(new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent event) {
+                    if(event.getButton().equals(MouseButton.PRIMARY)){
+                        if(event.getClickCount() == 2){
+                            System.out.println("Double clicked");
+                        }
+                    }
+                }    
+            });
+        } 
         acordeon.getPanes().addAll(setsTitledPane);
+        
         
         //HBox pentru butoane;
         VBox box = new VBox();
