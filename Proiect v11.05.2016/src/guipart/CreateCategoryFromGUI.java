@@ -155,23 +155,25 @@ public class CreateCategoryFromGUI {
         
         create.setOnAction(e -> {
             String categoryName = textField.getText();
-            String keyWordsPref = textField2.getText();
+            String keyWordsPref=new String();
+            keyWordsPref = textField2.getText();
             ArrayList<String> keyWords = new ArrayList<String>(Arrays.asList(keyWordsPref.split(",[ ]*")));
             Category cat = new Category();
             
-            if(!keyWords.isEmpty())
+            if(!keyWordsPref.isEmpty())
                 cat.define(categoryName,keyWords);
             
-            if(!fileNames.get(0).getAbsolutePath().isEmpty())
+            if(!fileNames.isEmpty())
                 cat.define(categoryName, fileNames.get(0).getAbsolutePath());
             
             mainPage.refreshCategoryList();
-            window.setScene(mainPage.mainPageScene);
+            mainPage.start(mainPage.getStage());
+           
         });
         
         back.setOnAction(e -> {
             mainPage.refreshCategoryList();
-            window.setScene(mainPage.mainPageScene);
+            mainPage.start(mainPage.getStage());
         });
         
         mainPageBorder.setTop(imageBox);
