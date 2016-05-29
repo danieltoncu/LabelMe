@@ -5,8 +5,6 @@
  */
 package guipart;
 
-import apipart.Categorize;
-import apipart.Category;
 import apipart.XML;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,14 +18,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -54,6 +51,8 @@ public class MainPage extends Application {
 
     Scene mainPageScene;
     Stage mainStage;
+    StackPane forText = new StackPane();
+    
 
     public void refreshCategoryList(){
 
@@ -80,10 +79,11 @@ public class MainPage extends Application {
         mainStage = primaryStage;
         //categorie.addText("Sport");
         //categorii.add(categorie);
-
+        
         refreshCategoryList();
-        
-        
+        forText.setPrefSize(300, 300);
+        forText.setMaxSize(300, 300);
+        forText.setAlignment(Pos.CENTER);
         TitledPane[] setsTitledPane = new TitledPane[categorii.size()];
 
         BorderPane mainPageBorder = new BorderPane();
@@ -95,7 +95,7 @@ public class MainPage extends Application {
         Image image = new Image(getClass().getResourceAsStream("/resources/gui/labelme_logo.png"));
         imageLabel.setGraphic(new ImageView(image));
         imageLabel.setPrefSize(200, 200);
-        imageLabel.setPadding(new Insets( 0, 100, 0, 100));
+        imageLabel.setPadding(new Insets( 0, 100, 60, 100));
         HBox imageBox = new HBox();
         imageBox.setAlignment(Pos.CENTER);
         imageBox.setPadding(new Insets(20, 20, 20, 20));
@@ -135,6 +135,9 @@ public class MainPage extends Application {
                 + "-fx-text-fill: white;");
         setButton.setStyle("-fx-background-color: #FF6200;"
                 + "-fx-text-fill: white;");
+        forText.setStyle("-fx-border-color: #C2AFFF;"
+                + "-fx-border-width: 2px;"
+                + "-fx-background-color: #FFFFFF;");
         box.getChildren().addAll(messageButton, categoryButton, setButton);
         
         
@@ -153,7 +156,8 @@ public class MainPage extends Application {
         outsidePageBorder.setCenter(total);
         total.getChildren().addAll(stanga, dreapta);
         stanga.getChildren().add(imageLabel);
-        stanga.getChildren().add(textContainer);
+        stanga.getChildren().add(forText);
+        stanga.setAlignment(Pos.CENTER);
         dreapta.getChildren().add(box);
         
         
@@ -164,7 +168,6 @@ public class MainPage extends Application {
         
         
         mainPageScene = new Scene(outsidePageBorder, 900, 600);
-
         mainStage.setTitle("MainPage!");
         mainStage.setScene(mainPageScene);
         mainStage.show();
