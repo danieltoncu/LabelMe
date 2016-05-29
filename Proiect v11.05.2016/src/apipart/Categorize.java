@@ -9,6 +9,7 @@ import opennlp.tools.util.PlainTextByLineStream;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -89,4 +90,29 @@ public class Categorize {
         }
         return rezultat;
     }
+    
+    public void copyFile(File sourceFile, File destFile) throws IOException {
+
+        if(!destFile.exists()) {
+            destFile.createNewFile();
+        }
+
+        FileChannel source = null;
+        FileChannel destination = null;
+        
+        try {
+            source = new FileInputStream(sourceFile).getChannel();           
+            destination = new FileOutputStream(destFile).getChannel();
+            destination.transferFrom(source, 0, source.size());
+        }
+        finally {
+            if(source != null) {
+                source.close();
+            }
+            if(destination != null) {
+                destination.close();
+            }
+        }
+
+     }
 }

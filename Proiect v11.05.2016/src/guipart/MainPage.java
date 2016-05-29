@@ -168,7 +168,12 @@ public class MainPage extends Application {
         
         
         mainPageScene = new Scene(outsidePageBorder, 900, 600);
+<<<<<<< HEAD
         mainStage.setTitle("MainPage!");
+=======
+
+        mainStage.setTitle("LabelMe");
+>>>>>>> 6f386d91b283c33ba624c7ff16bd91f11eaf9b7e
         mainStage.setScene(mainPageScene);
         mainStage.show();
     }
