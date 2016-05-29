@@ -61,14 +61,14 @@ public class MainPage extends Application {
         
         Set<String> keys = mapXml.keySet();
         for(String s : keys){
-            SetOfCategories categorie = new SetOfCategories(s);
+            SetOfCategories categories = new SetOfCategories(s);
             ArrayList<String> texte = new ArrayList<>();
             texte = mapXml.get(s);
             
             for(int i = 0; i < texte.size(); i++){
-                categorie.addText(texte.get(i));
+                categories.addText(texte.get(i));
             }            
-            categorii.add(categorie);     
+            categorii.add(categories);     
         }
         
     }

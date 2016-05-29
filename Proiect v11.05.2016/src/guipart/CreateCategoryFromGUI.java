@@ -154,15 +154,15 @@ public class CreateCategoryFromGUI {
         boxButtons.getChildren().addAll(back, create);
         
         create.setOnAction(e -> {
-            String categoryName        = textField.getText();
-            String keyWordsPref        = textField2.getText();
+            String categoryName = textField.getText();
+            String keyWordsPref = textField2.getText();
             //ArrayList<String> keyWords = (ArrayList)Arrays.asList(keyWordsPref.split(","));
             ArrayList<String> keyWords = new ArrayList<String>(Arrays.asList(keyWordsPref.split(",[ ]*")));
             Category cat = new Category();
-           // cat.define(categoryName,keyWords);
-            cat.define(categoryName, fileNames.get(0).getAbsolutePath());
-            //mainPage.refreshCategoryList();
-            //window.setScene(mainPage.mainPageScene);
+            cat.define(categoryName,keyWords);
+            //cat.define(categoryName, fileNames.get(0).getAbsolutePath());
+            mainPage.refreshCategoryList();
+            window.setScene(mainPage.mainPageScene);
         });
         
         back.setOnAction(e -> {

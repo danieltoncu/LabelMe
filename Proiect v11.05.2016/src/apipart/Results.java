@@ -24,7 +24,7 @@ public class Results {
 			String categoryName = stringTokenizer.nextElement().toString();
 			category = categoryName.substring(0, categoryName.indexOf("["));
 			name2 = categoryName.substring(categoryName.indexOf("[") + 1, categoryName.indexOf("]"));
-		        Double percent = Double.parseDouble(name2.trim());
+			Float percent = Float.parseFloat(name2);
 			BigDecimal a = BigDecimal.valueOf(percent);
 			myMap.put(category, a);
 		}
