@@ -29,6 +29,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import static javafx.application.Application.launch;
 
 public class MainPage extends Application {
     Text text = new Text("aici se afiseaza continutul fisierului text.");
@@ -47,7 +48,7 @@ public class MainPage extends Application {
     
     Button messageButton;
     Button categoryButton;
-    Button setButton;
+    Button emailButton;
 
     Scene mainPageScene;
     Stage mainStage;
@@ -123,22 +124,22 @@ public class MainPage extends Application {
         box.setAlignment(Pos.CENTER);
         messageButton = new Button("Add Texts");
         categoryButton = new Button("Add Category");
-        setButton = new Button("Email");
+        emailButton = new Button("Email");
         box.setPadding(new Insets(20, 0, 0, 0));
 
         messageButton.setPrefSize(200, 35);
         categoryButton.setPrefSize(200, 35);
-        setButton.setPrefSize(200, 35);
+        emailButton.setPrefSize(200, 35);
         messageButton.setStyle("-fx-background-color: #FF6200;"
                 + "-fx-text-fill: white;");
         categoryButton.setStyle("-fx-background-color: #FF6200;"
                 + "-fx-text-fill: white;");
-        setButton.setStyle("-fx-background-color: #FF6200;"
+        emailButton.setStyle("-fx-background-color: #FF6200;"
                 + "-fx-text-fill: white;");
         forText.setStyle("-fx-border-color: #C2AFFF;"
                 + "-fx-border-width: 2px;"
                 + "-fx-background-color: #FFFFFF;");
-        box.getChildren().addAll(messageButton, categoryButton, setButton);
+        box.getChildren().addAll(messageButton, categoryButton, emailButton);
         
         
         messageButton.setOnAction(e -> {
@@ -150,6 +151,11 @@ public class MainPage extends Application {
         
         categoryButton.setOnAction(e -> {
             CreateCategoryFromGUI newGUI = new CreateCategoryFromGUI(this);
+        });
+        
+        emailButton.setOnAction(e ->
+        {
+                
         });
         
         outsidePageBorder.setLeft(acordeon);

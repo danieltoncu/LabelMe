@@ -155,7 +155,6 @@ public class AddMessageUploadFile {
                                     for(int index=0;index < categories.size() ; index++){
                                         rezultat=rezultat+" "+categories.get(index);
                                     }
-                                    System.out.println(rezultat);
                                     files.add(fileName + "      " + rezultat);
                                 } catch (IOException ex) {
                                     Logger.getLogger(AddMessageUploadFile.class.getName()).log(Level.SEVERE, null, ex);
@@ -169,6 +168,7 @@ public class AddMessageUploadFile {
                         files.remove(0);
                         i++;
                     }
+                     mainPage.refreshCategoryList();
                       window.setScene(mainPage.mainPageScene);
                     /*
                     try {
