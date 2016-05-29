@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -163,15 +162,15 @@ public class MainPage extends Application {
             mainStage.setScene(addMessage.getScene());
         });
         
+        emailButton.setOnAction(e -> {
+            EmailPage emailPageee = new EmailPage(this);
+        });
+        
         
         categoryButton.setOnAction(e -> {
             CreateCategoryFromGUI newGUI = new CreateCategoryFromGUI(this);
         });
         
-        emailButton.setOnAction(e ->
-        {
-                
-        });
         
         outsidePageBorder.setLeft(acordeon);
         outsidePageBorder.setCenter(total);
