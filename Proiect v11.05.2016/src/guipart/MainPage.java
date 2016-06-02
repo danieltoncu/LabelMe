@@ -124,24 +124,22 @@ public class MainPage extends Application {
         vbox.setSpacing(70);
         vbox.setAlignment(Pos.CENTER);
   
-//
-//        for (int i = 0; i < categorii.size(); i++) {
-//            setsTitledPane[i] = new TitledPane();
-//            setsTitledPane[i].setText(categorii.get(i).getName());
-//            setsTitledPane[i].setContent(categorii.get(i).categorii);
-//            setsTitledPane[i].getContent().setOnMouseClicked(new EventHandler<MouseEvent>(){
-//                @Override
-//                public void handle(MouseEvent event) {
-//                    if(event.getButton().equals(MouseButton.PRIMARY)){
-//                        if(event.getClickCount() == 2){
-//                            System.out.println("Double clicked");
-//                        }
-//                    }
-//                }    
-//            });
-//        } 
-//        acordeon.getPanes().addAll(setsTitledPane);
-//        
+        TitledPane[] setsTitledPane = new TitledPane[categorii.size()];
+        for (int i = 0; i < categorii.size(); i++) {
+            setsTitledPane[i] = new TitledPane();
+            setsTitledPane[i].setText(categorii.get(i).getName());
+            setsTitledPane[i].setContent(categorii.get(i).categorii);
+            setsTitledPane[i].getContent().setOnMouseClicked(new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent event) {
+                    if(event.getButton().equals(MouseButton.PRIMARY)){
+                        if(event.getClickCount() == 2){
+                            System.out.println("Double clicked");
+                     }
+                   }
+               }    
+           });
+       }         
         
         //HBox pentru butoane;
         VBox box = new VBox();

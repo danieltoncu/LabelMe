@@ -120,6 +120,16 @@ public class AddMessageUploadFile {
                     fileNames.add(file);
                     files.add(file.getName());
                 }
+                
+                System.out.println("Fisierul "+file.toString());
+                    System.out.println("Calea destinatiei "+currDir.getAbsoluteFile().getParent());
+                    File pathDirectory= new File( currDir.getAbsoluteFile().getParent()+"\\Messages\\"+file.getName());
+                    System.out.println(pathDirectory.toString());
+                try {
+                    new apipart.Categorize().copyFile(file,pathDirectory);
+                } catch (IOException ex) {
+                    Logger.getLogger(AddMessageUploadFile.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         });
