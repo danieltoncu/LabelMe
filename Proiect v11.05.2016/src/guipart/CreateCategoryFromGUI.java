@@ -159,16 +159,23 @@ public class CreateCategoryFromGUI {
             keyWordsPref = textField2.getText();
             ArrayList<String> keyWords = new ArrayList<String>(Arrays.asList(keyWordsPref.split(",[ ]*")));
             Category cat = new Category();
+              
+            if(!categoryName.isEmpty()){
+                if(!keyWordsPref.isEmpty())
+                    cat.define(categoryName,keyWords);
             
-            if(!keyWordsPref.isEmpty())
-                cat.define(categoryName,keyWords);
+                if(!fileNames.isEmpty())
+                    cat.define(categoryName, fileNames.get(0).getAbsolutePath());
             
-            if(!fileNames.isEmpty())
-                cat.define(categoryName, fileNames.get(0).getAbsolutePath());
-            
-            mainPage.refreshCategoryList();
-            mainPage.start(mainPage.getStage());
-           
+         
+                
+                mainPage.refreshCategoryList();
+                mainPage.start(mainPage.getStage());
+              }
+            else{
+                  textField.setPromptText("Set a category name!");
+                  textField.setStyle("-fx-prompt-text-fill: red;");
+            }
         });
         
         back.setOnAction(e -> {
