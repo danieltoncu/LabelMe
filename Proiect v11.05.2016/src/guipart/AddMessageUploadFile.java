@@ -155,6 +155,7 @@ public class AddMessageUploadFile {
                                     for(int index=0;index < categories.size() ; index++){
                                         rezultat=rezultat+" "+categories.get(index);
                                     }
+                                    
                                     files.add(fileName + "      " + rezultat);
                                 } catch (IOException ex) {
                                     Logger.getLogger(AddMessageUploadFile.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,8 +169,7 @@ public class AddMessageUploadFile {
                         files.remove(0);
                         i++;
                     }
-                     mainPage.refreshCategoryList();
-                      window.setScene(mainPage.mainPageScene);
+                    
                     /*
                     try {
                         textCategory.setText("The text category is: " + categorize.getCategory(FileUtils.readFileToString(fileNames.get(fileNames.size() - 1), "UTF-8")));
@@ -201,8 +201,8 @@ public class AddMessageUploadFile {
         });
 
         backButton.setOnAction(e -> {
-            window.setScene(mainPage.mainPageScene);
-
+             mainPage.refreshCategoryList();
+                     mainPage.start(mainPage.getStage());
         });
 
         layout.getChildren().addAll(imageLabel2, addMessagesLabel, hBox, textCategory, fileList , backButton);

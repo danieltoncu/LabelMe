@@ -104,7 +104,6 @@ public class Category {
         xml.addCategory(name);
         Categorize categorize=new Categorize();
     	categorize.trainModel();
-    	categorize.trainModel();
     	DefinitionXML xml2=new DefinitionXML();
     	xml2.addCategory(name);
     	for(String s : keywords){
