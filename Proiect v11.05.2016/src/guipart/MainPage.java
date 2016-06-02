@@ -6,10 +6,14 @@
 package guipart;
 
 import apipart.XML;
+import com.cybozu.labs.langdetect.DetectorFactory;
+import com.cybozu.labs.langdetect.LangDetectException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -73,6 +77,11 @@ public class MainPage extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        try {
+            DetectorFactory.loadProfile("profiles");
+        } catch (LangDetectException ex) {
+            Logger.getLogger(EmailPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         mainStage = primaryStage;
         //categorie.addText("Sport");
