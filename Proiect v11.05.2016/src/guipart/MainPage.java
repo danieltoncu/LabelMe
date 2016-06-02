@@ -42,7 +42,6 @@ public class MainPage extends Application {
     
 
     
-    
     Button messageButton;
     Button categoryButton;
     Button emailButton;
@@ -54,6 +53,7 @@ public class MainPage extends Application {
 
     public void refreshCategoryList(){
 
+        categorii = new ArrayList<>();
         XML xml = new XML();
         mapXml = xml.getMessagesForCategory();
         
@@ -68,6 +68,7 @@ public class MainPage extends Application {
             }            
             categorii.add(categories);     
         }
+           // setsTitledPane = new TitledPane[categorii.size()];
             }
 
     @Override
@@ -77,6 +78,7 @@ public class MainPage extends Application {
         //categorie.addText("Sport");
         //categorii.add(categorie);
         
+        Accordion acordeon = new Accordion();
     TextFlow continut = new TextFlow();    
     HBox total = new HBox();
     VBox stanga = new VBox();
@@ -90,7 +92,7 @@ public class MainPage extends Application {
         continut.setPadding(new Insets(10, 10, 10, 10));
         continut.getChildren().add(text);
         forText.getChildren().add(continut);
-        TitledPane[] setsTitledPane = new TitledPane[categorii.size()];
+    
 
         BorderPane mainPageBorder = new BorderPane();
         BorderPane outsidePageBorder = new BorderPane();
@@ -114,7 +116,7 @@ public class MainPage extends Application {
         vbox.setSpacing(70);
         vbox.setAlignment(Pos.CENTER);
   
-        setsTitledPane = new TitledPane[categorii.size()];
+          TitledPane[] setsTitledPane = new TitledPane[categorii.size()];
         for (int i = 0; i < categorii.size(); i++) {
             setsTitledPane[i] = new TitledPane();
             setsTitledPane[i].setText(categorii.get(i).getName());
@@ -129,8 +131,9 @@ public class MainPage extends Application {
                    }
                }    
            });
-       }         
-        
+       }
+        acordeon.getPanes().addAll(setsTitledPane);
+                    
         //HBox pentru butoane;
         VBox box = new VBox();
         box.setPadding(new Insets(20, 20, 20, 20));
