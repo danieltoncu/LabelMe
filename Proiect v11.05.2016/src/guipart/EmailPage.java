@@ -1,6 +1,7 @@
 
 package guipart;
 
+import apipart.Categorize;
 import apipart.MailReader;
 import static apipart.MailReader.fetch;
 import com.cybozu.labs.langdetect.Detector;
@@ -32,6 +33,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import org.apache.commons.io.FileUtils;
 
 public class EmailPage {
     MainPage mainPage = new MainPage();
@@ -136,7 +138,10 @@ public class EmailPage {
                                 detector.append(messages.get(i));
                                 String lang = detector.detect();
                                 
-                                if(lang.equals("ro")){
+                                if(lang.equals("ro") || lang.equals("en")){
+                                    
+                                    Categorize categorize = new Categorize();
+                                    
                                     File file = new File("mails/"+ usernameField.getText() + "/" +  MailReader.subjects.get(i) + ".txt");
                                     file.createNewFile();
                                 
@@ -144,7 +149,9 @@ public class EmailPage {
                                     BufferedWriter bw = new BufferedWriter(fw);
 
                                     bw.write(messages.get(i));
-                                    bw.close();  
+                                    bw.close();
+                                    
+                                    ArrayList<String> categories = categorize.getCategory(messages.get(i),file.getName());
                                 }
                                 
                             } catch (FileNotFoundException ex) {
