@@ -1,0 +1,35 @@
+Accesul la aplicațiile mai puțin sigure a fost activat
+
+
+
+Bună ziua, Label,
+Recent, ați schimbat setările de securitate astfel încât Contul Google
+labelmetest@gmail.com nu mai este protejat conform standardelor moderne de
+securitate.
+
+Rețineți că acum contul dvs. este mai ușor de accesat de către o persoană
+rău-voitoare. Vă puteți securiza din nou contul anulând această modificare
+aici <https://www.google.com/settings/security/lesssecureapps>, apoi
+trecând la aplicații create de Google, cum ar fi Gmail, pentru a vă accesa
+contul.
+
+*Nu recunoașteți această activitate?*
+Examinați acum dispozitivele folosite recent
+<https://accounts.google.com/AccountChooser?Email=labelmetest@gmail.com&continue=https://security.google.com/settings/security/activity?rfn%3D28%26rfnc%3D1%26asae%3D2>
+.
+
+Cu stimă,
+Echipa Conturi Google
+
+
+
+Această adresă de e-mail nu poate primi răspunsuri. Pentru mai multe
+informații, accesați Centrul de ajutor Conturi Google
+<https://support.google.com/accounts/answer/6010255>.
+
+
+
+Ați primit acest anunț obligatoriu prin e-mail privind serviciile pentru a
+vă informa cu privire la modificările importante aduse produsului sau
+Contului dvs. Google.
+© 2016 Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA

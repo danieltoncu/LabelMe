@@ -18,6 +18,7 @@ import javax.mail.*;
 public class MailReader {
     
     static ArrayList<String> storedMessages = null;
+    static public ArrayList<String> subjects = new ArrayList<String>();
     static String pop3Host = "pop.gmail.com";// change accordingly
     static String mailStoreType = "pop3";
 
@@ -49,6 +50,7 @@ public class MailReader {
 
             for (int i = 0; i < messages.length; i++) {
                 Message message = messages[i];
+                subjects.add(message.getSubject());
                 writePart(message);
             }
             emailFolder.close(false);
@@ -72,6 +74,7 @@ public class MailReader {
         if (p instanceof Message) //Call methos writeEnvelope
         {
            // writeEnvelope((Message) p);
+           
         }
 
         if (p.isMimeType("text/plain")) {

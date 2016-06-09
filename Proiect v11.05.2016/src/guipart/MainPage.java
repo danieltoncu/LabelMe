@@ -6,10 +6,15 @@
 package guipart;
 
 import apipart.XML;
+import com.cybozu.labs.langdetect.DetectorFactory;
+import com.cybozu.labs.langdetect.LangDetectException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -31,6 +36,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import static javafx.application.Application.launch;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 
 public class MainPage extends Application {
     Text text = new Text("aici se afiseaza continutul fisierului text.");
@@ -73,6 +82,7 @@ public class MainPage extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        
 
         mainStage = primaryStage;
         //categorie.addText("Sport");
@@ -172,7 +182,24 @@ public class MainPage extends Application {
         
         
         categoryButton.setOnAction(e -> {
-            CreateCategoryFromGUI newGUI = new CreateCategoryFromGUI(this);
+            //CreateCategoryFromGUI newGUI = new CreateCategoryFromGUI(this);
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setContentText("How do you want to create a category?");
+
+            ButtonType buttonTypeOne = new ButtonType("Through GUI");
+            ButtonType buttonTypeTwo = new ButtonType("I have a file");
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeOne){
+                CreateCategoryFromGUI newGUI = new CreateCategoryFromGUI(this);
+            } else if (result.get() == buttonTypeTwo) {
+                CreateCategoryWithFile newGUI = new CreateCategoryWithFile(this);
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
         });
         
         
@@ -212,6 +239,11 @@ public class MainPage extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        try {
+            DetectorFactory.loadProfile("profiles");
+        } catch (LangDetectException ex) {
+            Logger.getLogger(EmailPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         launch(args);
     }
 

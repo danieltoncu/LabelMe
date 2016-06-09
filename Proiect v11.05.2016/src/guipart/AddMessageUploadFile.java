@@ -200,8 +200,8 @@ public class AddMessageUploadFile {
         });
 
         backButton.setOnAction(e -> {
-             mainPage.refreshCategoryList();
-                     mainPage.start(mainPage.getStage());
+            mainPage.refreshCategoryList();
+            mainPage.start(mainPage.getStage());
         });
 
         layout.getChildren().addAll(imageLabel2, addMessagesLabel, hBox, textCategory, fileList , backButton);
