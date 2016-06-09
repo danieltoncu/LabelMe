@@ -133,18 +133,7 @@ public class AddMessageUploadFile {
             }
 
         });
-        //TODO: right click -> remove file from list
-//        fileList.setOnMouseClicked(e -> {
-//            if(e.isSecondaryButtonDown() && !fileList.getSelectionModel().getSelectedItem().isEmpty()){
-//             files.remove(fileList.getSelectionModel().getSelectedItem());
-//             for(File file : fileNames){
-//                   if(file.getName().equals(fileList.getSelectionModel().getSelectedItem())){
-//                       fileNames.remove(file);
-//                       break;
-//                    }
-//             }
-//            }
-//        });
+
         
         acceptButton.setOnAction(new EventHandler<ActionEvent>() {
 

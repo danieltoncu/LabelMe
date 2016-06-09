@@ -133,7 +133,8 @@ public class MainPage extends Application {
            });
        }
         acordeon.getPanes().addAll(setsTitledPane);
-                    
+        
+        
         //HBox pentru butoane;
         VBox box = new VBox();
         box.setPadding(new Insets(20, 20, 20, 20));
