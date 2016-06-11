@@ -243,3 +243,8 @@ a {
 @media screen and (max-width: 42em) {
   .site-footer {
     font-size: 0.9rem; } }
+
+.shadowed {
+  -webkit-filter: drop-shadow(0px 0px 25px white);
+  filter: url(#drop-shadow);
+}
